@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Button from "./Button";
+import Button from "./components/Button";
+import  StepMessage  from "./components/StepMessage";
 
 const messages = [
   "Learn React ⚛️",
@@ -13,17 +14,12 @@ export default  function App(){
   const [step, setStep] =useState(1)
   const [isOpen,setIsOpen] = useState(true)
   function handlePrevious(){
-    setStep(getStep(step)-1);
+   if (step > 1) setStep(s=> s-1)
   }
   function handleNext(){
-    setStep(getStep(step)+1);
+   if (step < 3) setStep(s=> s+1)
   }
-  function getStep(step){
-    if(step < 1) return 1
-    else if (step >=1 && step <=3) return step
-    else return 3;
 
-  }
   return (
   
 <>
@@ -34,18 +30,20 @@ export default  function App(){
   {  isOpen && (
     <div className="steps">
           <div className="numbers">
-            <div className={getStep(step) ===1 ? 'active' : ''}>1</div>
-            <div className={getStep(step) === 2 ? 'active' : ''}>2</div>
-            <div className={getStep(step) === 3 ? 'active' : ''}>3</div>
+            <div className={step >= 1 ? 'active' : ''}>1</div>
+            <div className={step >= 2 ? 'active' : ''}>2</div>
+            <div className={step >= 3 ? 'active' : ''}>3</div>
           </div>
 
-          <p className="message">Step {getStep(step)}: {messages[getStep(step)-1]}</p>
-
+          
+          <StepMessage step={step}>{messages[step -1]}</StepMessage>
+ 
           <div className="buttons">
-            <Button textColor={"#fff"} bgColor={"#7950f2"} onClick={handlePrevious} text={"Previous" } emoji={"👈🏻"} />
-            <Button textColor={"#fff"} bgColor={"#7950f2"} onClick={handleNext} text={"Next"}  emoji={"👉🏻"}/>
+            <Button textColor={"#fff"} bgColor={"#7950f2"} onClick={handlePrevious} ><span>👈🏻</span> Previous</Button>
+            <Button textColor={"#fff"} bgColor={"#7950f2"} onClick={handleNext} >Next <span>👉🏻</span></Button>
           </div>
     </div>  )
   }
   </>)
 }
+

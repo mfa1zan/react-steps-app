@@ -2,9 +2,6 @@
 
 This is a simple React app that displays a 3-step guide using the useState hook. Users can navigate between steps and toggle the visibility of the entire steps panel.
 
-## 📷 Preview
-![Web Page Screenshot](./assets/Preview.png)
-
 ## ✨ Features
 - Built using React
 - Demonstrates useState for state management
